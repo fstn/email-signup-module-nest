@@ -1,8 +1,8 @@
 import {Test, TestingModule} from '@nestjs/testing';
-import {EmailRepository} from "../auth/email.repository";
 import {getUseValueRepository} from "../utils/test";
 import {CreateEmailDto} from "./dtos/create-email.dto";
 import {VerifyCodeDto} from "./dtos/verify-code.dto";
+import {EmailRepository} from "./email.repository";
 import {EmailService, InvalidCodeError} from './email.service';
 
 describe('EmailService', () => {

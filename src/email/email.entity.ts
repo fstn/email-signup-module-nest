@@ -1,11 +1,10 @@
-import {Column, Entity, PrimaryColumn} from "typeorm";
-import {VersionedBase} from "../common/versioned-base.entity";
+import {BaseEntity, Column, Entity, PrimaryColumn} from "typeorm";
 
 /**
  * Entity use to store signup email/code tries
  */
 @Entity()
-export class Email extends VersionedBase {
+export class Email extends BaseEntity {
     @PrimaryColumn()
     email: string
 

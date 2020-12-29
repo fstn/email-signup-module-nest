@@ -1,6 +1,6 @@
 // created from 'create-ts-index'
 
 export * from './dtos';
-export * from './emails.module';
-export * from './emails.service.spec';
-export * from './emails.service';
+export * from './email.module';
+
+export * from './email.service';

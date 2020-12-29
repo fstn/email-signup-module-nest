@@ -1,5 +1,4 @@
 import {IsAlphanumeric, IsEmail, IsNotEmpty, IsString} from "class-validator";
-import {Candidate} from "../../candidate/candidate.entity";
 
 export class SubscribeEmailDto {
   @IsNotEmpty()
@@ -17,10 +16,10 @@ export class SubscribeEmailDto {
   @IsString()
   password: string
 
-  constructor(candidate: Candidate, password: string) {
-    this.firstName = candidate.firstName;
-    this.lastName = candidate.lastName;
-    this.email = candidate.email;
+  constructor(user: any, password: string) {
+    this.firstName = user.firstName;
+    this.lastName = user.lastName;
+    this.email = user.email;
     this.password = password
   }
 }
