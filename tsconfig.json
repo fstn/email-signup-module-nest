@@ -7,9 +7,20 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "target": "es2017",
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "strict": true,
     "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true
-  }
+    "sourceRoot": "./src",
+    "incremental": true,
+    "types": [
+      "node",
+      "jest"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "test"
+  ]
 }

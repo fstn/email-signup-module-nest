@@ -4,17 +4,17 @@ export class SubscribeEmailDto {
   @IsNotEmpty()
   @IsString()
   @IsAlphanumeric()
-  firstName: string;
+  firstName!: string;
   @IsNotEmpty()
   @IsString()
   @IsAlphanumeric()
-  lastName: string;
+  lastName!: string;
   @IsNotEmpty()
   @IsEmail()
-  email: string;
+  email!: string;
   @IsNotEmpty()
   @IsString()
-  password: string
+  password!: string
 
   constructor(user: any, password: string) {
     this.firstName = user.firstName;

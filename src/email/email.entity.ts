@@ -6,8 +6,8 @@ import {BaseEntity, Column, Entity, PrimaryColumn} from "typeorm";
 @Entity()
 export class Email extends BaseEntity {
     @PrimaryColumn()
-    email: string
+    email!: string
 
     @Column()
-    code: string
+    code!: string
 }
