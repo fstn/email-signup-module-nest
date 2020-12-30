@@ -2,13 +2,12 @@ import {Injectable, UnauthorizedException} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {TypeOrmCrudService} from "@nestjsx/crud-typeorm";
 import {validate} from "class-validator";
+import {InvalidCodeError} from "../errors";
 import {CreateEmailDto} from './dtos/create-email.dto';
 import {SubscribeEmailDto} from "./dtos/subscribe-email.dto";
 import {VerifyCodeDto} from './dtos/verify-code.dto';
 import {Email} from "./email.entity";
 import {EmailRepository} from "./email.repository";
-
-export const InvalidCodeError = new UnauthorizedException("Invalid code")
 
 @Injectable()
 export class EmailService extends TypeOrmCrudService<Email> {
