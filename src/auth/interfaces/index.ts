@@ -1,6 +1,8 @@
 // created from 'create-ts-index'
 
-export * from './app-user.service';
-export * from './auth-service.interface';
+export * from './base-jwt-configuration';
+export * from './base-auth-service';
 export * from './jwt-constants.interface';
-export * from './send-grid.config.interface';
+export * from './base-send-grid-configuration';
+export * from './base-facebook-configuration';
+export * from './base-google-configuration';

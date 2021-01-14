@@ -1,29 +1,28 @@
-import {Injectable} from "@nestjs/common";
-import {PassportStrategy} from "@nestjs/passport";
-import {Profile, Strategy} from "passport-facebook";
+import { PassportStrategy } from '@nestjs/passport';
+import { Strategy, VerifyCallback } from 'passport-google-oauth20';
+import { config } from 'dotenv';
+
+import { Injectable } from '@nestjs/common';
 import {CreateEmailDto} from "../email/dtos";
-import {AuthConfiguration} from "./interfaces";
+import {BaseGoogleConfiguration} from "./interfaces/base-google-configuration";
+
+config();
 
 @Injectable()
-export class FacebookStrategy extends PassportStrategy(Strategy, "facebook") {
+export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     constructor(
-        private readonly authConfiguration: AuthConfiguration,) {
+        private readonly authConfiguration: BaseGoogleConfiguration,) {
         super({
-            clientID: authConfiguration.facebook.clientId,
-            clientSecret: authConfiguration.facebook.secret,
-            callbackURL: authConfiguration.facebook.callbackUrl,
-            scope: authConfiguration.facebook.scope || "email",
-            profileFields: ["emails", "name", ...authConfiguration.facebook.profileFields],
+            clientID: authConfiguration?.config?.clientId || "empty",
+            clientSecret: authConfiguration?.config?.secret || "empty",
+            callbackURL: authConfiguration?.config?.callbackUrl,
+            scope: authConfiguration?.config?.scope || ['email', 'profile'],
         });
     }
 
-    async validate(
-        accessToken: string,
-        refreshToken: string,
-        profile: Profile,
-        done: (err: any, user: any, info?: any) => void
-    ): Promise<any> {
-        const {name, emails} = profile;
+
+    async validate (accessToken: string, refreshToken: string, profile: any, done: VerifyCallback): Promise<any> {
+        const { name, emails, photos } = profile
         if (!emails || emails?.length == 0) {
             throw new Error("Missing email in facebook callback data")
         }
@@ -34,12 +33,11 @@ export class FacebookStrategy extends PassportStrategy(Strategy, "facebook") {
         createEmailDto.email = emails[0].value;
         createEmailDto.firstname = name.givenName
         createEmailDto.lastname = name.familyName
-
         const payload = {
             user: createEmailDto,
             accessToken,
         };
 
-        done(null, payload);
+        done(undefined, payload);
     }
 }

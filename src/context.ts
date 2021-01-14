@@ -14,3 +14,4 @@ export const TestSafe = MapToForSnapshot(Scope.TEST_SAFE)
 export const getFake = get(Scope.FAKE)
 export const getEmpty = get(Scope.EMPTY)
 export const getTestSafe = getForSnapshot(Scope.TEST_SAFE)
+

@@ -1,5 +1,5 @@
-export interface SendGridConfig {
-    emails: {
+export abstract class BaseSendGridConfiguration {
+    emails!: {
         signup: {
             email: string,
             subject: string,
@@ -7,7 +7,7 @@ export interface SendGridConfig {
             html: (code:string)=>string
         }
     }
-    keys: {
+    keys!: {
         default: string,
         full: string
     }

@@ -19,6 +19,7 @@
     ]
   },
   "exclude": [
+    "demo",
     "node_modules",
     "dist",
     "test",

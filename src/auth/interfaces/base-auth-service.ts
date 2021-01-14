@@ -2,7 +2,7 @@ import {ChangePasswordDto} from "../../email/dtos";
 import {AuthCredentialsDto} from "../dtos";
 import {User} from "../user.entity";
 
-export abstract class AuthService {
+export abstract class BaseAuthService {
     abstract validateUser(authCredentialsDto: AuthCredentialsDto): Promise<any>;
     abstract login(user: User): Promise<any> ;
     abstract findByEmail(email: string): Promise<any>;

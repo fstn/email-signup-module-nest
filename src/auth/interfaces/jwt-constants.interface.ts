@@ -1,3 +1,3 @@
-export interface JwtConstants {
-    secret: string
+export class JwtConstants {
+    secret!: string
 }

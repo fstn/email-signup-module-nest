@@ -2,6 +2,7 @@ import {Injectable, UnauthorizedException} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {TypeOrmCrudService} from "@nestjsx/crud-typeorm";
 import {validate} from "class-validator";
+import {Repository} from "typeorm";
 import {InvalidCodeError} from "../errors";
 import {CreateEmailDto} from './dtos/create-email.dto';
 import {SubscribeEmailDto} from "./dtos/subscribe-email.dto";
@@ -13,8 +14,8 @@ import {EmailRepository} from "./email.repository";
 export class EmailService extends TypeOrmCrudService<Email> {
 
     constructor(
-        @InjectRepository(EmailRepository)
-        public emailRepository: EmailRepository) {
+        @InjectRepository(Email)
+        public emailRepository: Repository<Email>) {
         super(emailRepository)
     }
 
