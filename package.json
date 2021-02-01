@@ -1,7 +1,7 @@
 {
   "name": "@fstn/email-signup-module-nest",
   "description": "Nest js signup module",
-  "version": "1.0.30",
+  "version": "1.0.311",
   "author": "Stephen ZAMBAUX",
   "license": "MIT",
   "main": "dist/index.js",
@@ -25,7 +25,7 @@
     "@types/passport-facebook": "^2.1.10",
     "bcrypt": "^5.0.0",
     "class-transformer": "^0.3.1",
-    "class-validator": "^0.12.2",
+    "class-validator": "^0.13.1",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",
     "typeorm": "^0.2.28"
