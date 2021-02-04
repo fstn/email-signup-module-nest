@@ -1,5 +1,5 @@
 export abstract class BaseSendGridConfiguration {
-    emails!: {
+    public emails!: {
         signup: {
             email: string,
             subject: string,
@@ -7,7 +7,7 @@ export abstract class BaseSendGridConfiguration {
             html: (code:string)=>string
         }
     }
-    keys!: {
+    public keys!: {
         default: string,
         full: string
     }

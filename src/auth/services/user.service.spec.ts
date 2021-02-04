@@ -17,6 +17,7 @@ describe('UserService', () => {
             login: jest.fn(),
             setUserOnRequest: jest.fn(),
             validateUser: jest.fn(),
+            canActivate: jest.fn()
         }
         userService = new UserService(authService)
 

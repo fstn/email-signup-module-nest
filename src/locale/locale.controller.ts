@@ -46,7 +46,7 @@ export class LocaleController implements CrudController<Locale> {
       @ParsedBody() dto: Locale,
   ) {
     try {
-      return this.base.createOneBase(req, dto);
+      return this?.base?.createOneBase?.(req, dto);
     } catch (e) {
       //ignored
     }

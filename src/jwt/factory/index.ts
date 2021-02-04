@@ -1,1 +1,1 @@
-export * from "./base-jwt-configuration"
+export * from "./jwt-options.fractory"

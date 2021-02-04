@@ -13,9 +13,9 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     constructor(
         private readonly authConfiguration: BaseGoogleConfiguration,) {
         super({
-            clientID: authConfiguration?.config?.clientId || "empty",
-            clientSecret: authConfiguration?.config?.secret || "empty",
-            callbackURL: authConfiguration?.config?.callbackUrl,
+            clientID: authConfiguration?.config?.clientId,
+            clientSecret: authConfiguration?.config?.secret,
+            callbackURL: authConfiguration?.config?.callbackURL,
             scope: authConfiguration?.config?.scope || ['email', 'profile'],
         });
     }
@@ -34,7 +34,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
         createEmailDto.firstname = name.givenName
         createEmailDto.lastname = name.familyName
         const payload = {
-            user: createEmailDto,
+            ...createEmailDto,
             accessToken,
         };
 

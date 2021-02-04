@@ -9,9 +9,9 @@ export class FacebookStrategy extends PassportStrategy(Strategy, "facebook") {
     constructor(
         private readonly authConfiguration: BaseFacebookConfiguration,) {
         super({
-            clientID: authConfiguration?.config?.clientId || "empty",
-            clientSecret: authConfiguration?.config?.secret || "empty",
-            callbackURL: authConfiguration?.config?.callbackUrl,
+            clientID: authConfiguration?.config?.clientId,
+            clientSecret: authConfiguration?.config?.secret,
+            callbackURL: authConfiguration?.config?.callbackURL,
             scope: authConfiguration?.config?.scope || "email",
             profileFields: ["emails", "name", ...(authConfiguration?.config?.profileFields||[])],
         });
@@ -36,7 +36,7 @@ export class FacebookStrategy extends PassportStrategy(Strategy, "facebook") {
         createEmailDto.lastname = name.familyName
 
         const payload = {
-            user: createEmailDto,
+            ...createEmailDto,
             accessToken,
         };
 

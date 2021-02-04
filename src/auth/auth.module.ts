@@ -1,10 +1,21 @@
-import {DynamicModule, Module, Provider, Type} from '@nestjs/common';
-import {BaseGoogleConfiguration} from "./interfaces/base-google-configuration";
-import {BaseFacebookConfiguration} from "./interfaces/base-facebook-configuration";
+import {DynamicModule, Module} from '@nestjs/common';
+import {JwtModule as NestJwtModule} from "@nestjs/jwt";
+import {PassportModule} from "@nestjs/passport";
+import {AsyncOptions} from "../AsyncOptions";
+import {EmailModule} from "../email";
+import {EventModule} from "../event/event.module";
+import {AppJwtModule} from "../jwt/app-jwt.module";
+import {AppJwtOptionsFactory} from "../jwt/factory/jwt-options.fractory";
+import {BaseJwtConfiguration} from "../jwt/interface/base-jwt-configuration";
+import {LocaleModule} from "../locale/locale.module";
+import {EmailController} from "./email.controller";
+import {FacebookStrategy} from "./facebook.strategy";
+import {GoogleStrategy} from "./google.strategy";
+import {BaseAmplitudeConfiguration} from "./interfaces/base-amplitude-configuration";
 import {BaseAuthService} from "./interfaces/base-auth-service";
-import {BaseJwtConfiguration} from "./interfaces/base-jwt-configuration";
+import {BaseFacebookConfiguration} from "./interfaces/base-facebook-configuration";
+import {BaseGoogleConfiguration} from "./interfaces/base-google-configuration";
 import {BaseSendGridConfiguration} from "./interfaces/base-send-grid-configuration";
-import {JwtStrategy} from "./jwt.strategy";
 import {UserService} from "./services/user.service";
 import {UserStrategy} from "./user.strategy";
 
@@ -12,39 +23,27 @@ import {UserStrategy} from "./user.strategy";
 @Module({})
 export class AuthModule {
     public static registerAsync(
-        options: {
-            /*
-                Imports use by other services, generally ConfigModule
-            */
-            imports: any[],
-            /*
-                Facebook configuration
-             */
-            useFacebookConfig: Type<BaseFacebookConfiguration>,
-            /*
-                Google configuration
-             */
-            useGoogleConfig: Type<BaseGoogleConfiguration>,
-            /*
-                JWT configuration
-             */
-            useJwtConfig: Type<BaseJwtConfiguration>,
-            /*
-                Auth service
-             */
-            useService: Type<BaseAuthService>,
-            /*
-                SendGrid configuration
-             */
-            useSendGridConfig: Type<BaseSendGridConfiguration>
-        },
+        options: AsyncOptions,
     ): DynamicModule {
         return {
             module: AuthModule,
-            imports: options.imports,
+            imports: [
+                ...options.imports,
+                LocaleModule,
+                EventModule.registerAsync(options),
+                NestJwtModule.registerAsync({
+                    imports: [AppJwtModule.registerAsync(options)],
+                    useClass: AppJwtOptionsFactory
+                }),
+                PassportModule.register({defaultStrategy: 'jwt'}),
+                EmailModule.forRoot(),
+                AppJwtModule.registerAsync(options)
+            ],
+            controllers: [EmailController],
             providers: [
-                JwtStrategy,
                 UserService,
+                FacebookStrategy,
+                GoogleStrategy,
                 UserStrategy,
                 {
                     provide: BaseFacebookConfiguration,
@@ -63,6 +62,10 @@ export class AuthModule {
                     useClass: options.useService
                 },
                 {
+                    provide: BaseAmplitudeConfiguration,
+                    useClass: options.useAmplitudeConfig
+                },
+                {
                     provide: BaseSendGridConfiguration,
                     useClass: options.useSendGridConfig,
                 },
@@ -71,3 +74,4 @@ export class AuthModule {
         };
     }
 }
+

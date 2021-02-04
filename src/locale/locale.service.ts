@@ -6,7 +6,7 @@ import {Locale} from "./locale.entity";
 @Injectable()
 export class LocaleService extends TypeOrmCrudService<Locale> {
 
-  constructor(@InjectRepository(Locale) public repo) {
+  constructor(@InjectRepository(Locale) public repo: any) {
     super(repo);
   }
 }

@@ -5,11 +5,11 @@ import {AuthGuard} from '@nestjs/passport';
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
   constructor(
-      @Inject( "AuthService2")
+      @Inject( "BaseAuthService")
       private readonly authService:any) {
     super();
     if(!authService){
-      throw new InternalServerErrorException("AuthService2 is undefined in JwtAuthGuard")
+      throw new InternalServerErrorException("BaseAuthService is undefined in JwtAuthGuard")
     }
   }
 

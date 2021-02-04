@@ -46,7 +46,8 @@ export class LocalePublicController implements CrudController<Locale> {
         @ParsedRequest() req: CrudRequest,
     ) {
         // noinspection UnnecessaryLocalVariableJS
-        const r = await this.base.getManyBase(req);
+        // @ts-ignore
+        const r = await this?.base?.getManyBase(req);
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         return Object.assign({}, ...r.map((locale: Locale) => ({[locale.id]: locale.value || locale.id})))

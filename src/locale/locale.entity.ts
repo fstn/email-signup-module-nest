@@ -1,9 +1,10 @@
-import {Column, Entity} from "typeorm";
-import {VersionedBaseStringIdEntity} from "../common/versioned-base-string-id.entity";
+import {Column, Entity, PrimaryColumn} from "typeorm";
 
 @Entity()
-export class Locale extends VersionedBaseStringIdEntity {
+export class Locale {
+    @PrimaryColumn()
+    public id!: string;
 
-  @Column({nullable: true, type: "text"})
-  public value: string
+    @Column({nullable: true, type: "text"})
+    public value!: string
 }

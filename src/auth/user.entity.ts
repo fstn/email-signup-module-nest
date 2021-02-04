@@ -47,6 +47,7 @@ export class User extends BaseEntity {
 
   @ManyToOne(() => UserRole, {cascade: false, eager: true, nullable: true})
   //@Expose({name: 'role'})
+  // @ts-ignore
   @Transform(role => role?.name)
   // @ts-ignore
   public role: UserRole
