@@ -1,7 +1,7 @@
 {
   "name": "@fstn/email-signup-module-nest",
   "description": "Nest js signup module",
-  "version": "1.0.319",
+  "version": "1.0.320",
   "author": "Stephen ZAMBAUX",
   "license": "MIT",
   "main": "dist/index.js",
