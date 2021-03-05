@@ -1,7 +1,7 @@
 {
   "name": "@fstn/email-signup-module-nest",
   "description": "Nest js signup module",
-  "version": "1.0.326",
+  "version": "1.0.327",
   "author": "Stephen ZAMBAUX",
   "license": "MIT",
   "main": "dist/index.js",
@@ -100,6 +100,7 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest --all -config ./test/jest.config.js",
-    "publish-public": "yarn publish --access public"
+    "publish-public": "yarn publish --access public",
+    "p": "yarn publish --access public"
   }
 }
