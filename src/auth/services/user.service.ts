@@ -1,6 +1,7 @@
 import {Injectable} from '@nestjs/common';
 import {UserAlreadyExistsError} from "../../errors";
 import {BaseAuthService} from "../interfaces";
+import {IUser} from "../user.entity";
 
 @Injectable()
 export class UserService {
@@ -13,5 +14,9 @@ export class UserService {
         if (!!user) {
             throw UserAlreadyExistsError;
         }
+    }
+
+    async update(user: any){
+        await this.authService?.update(user)
     }
 }

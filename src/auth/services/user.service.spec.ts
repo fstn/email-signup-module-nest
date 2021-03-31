@@ -13,6 +13,7 @@ describe('UserService', () => {
         authService = {
             changePassword: jest.fn(),
             create: jest.fn(),
+            update: jest.fn(),
             findByEmail: jest.fn(),
             login: jest.fn(),
             setUserOnRequest: jest.fn(),

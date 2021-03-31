@@ -1,9 +1,11 @@
 import {
     Body,
-    Controller, Delete,
+    Controller,
+    Delete,
     Get,
     HttpStatus,
     Post,
+    Put,
     Req,
     Res,
     UnauthorizedException,
@@ -21,7 +23,7 @@ import {EmailService} from "../email/email.service";
 import {InvalidCodeError, UserAlreadyExistsError} from "../errors";
 import {EventService} from "../event/event.service";
 import {CrudUtils} from "../utils/crud.utils";
-import {LocalAuthGuard} from "./guards";
+import {JwtAuthGuard, LocalAuthGuard} from "./guards";
 import {
     BaseAuthService,
     BaseFacebookConfiguration,
@@ -190,6 +192,9 @@ export class EmailController {
     @UseGuards(LocalAuthGuard)
     async signIn(@Req() req: any, @Res() res: Response): Promise<any> {
         const {payload, access_token} = await this.createAccessToken(req.user);
+        req.user.backupConnectedAt = req.user.connectedAt || new Date(0);
+        req.user.connectedAt = new Date();
+        await this.userService.update(req.user)
         let cookie = this.createCookie(req.body.remember);
         res.cookie("token", access_token, cookie);
         return res.send({payload, access_token});
@@ -198,7 +203,7 @@ export class EmailController {
     @Delete("/login")
     async logout(@Req() req: any, @Res() res: Response): Promise<any> {
         let cookie = this.createCookie(true);
-        await this.eventService.log({event_type:"login",user_id:req.user.email})
+        await this.eventService.log({event_type: "login", user_id: req?.user?.email})
         res.cookie("token", undefined, cookie);
         return res.send();
     }
@@ -262,6 +267,82 @@ export class EmailController {
 
     }
 
+    @Get("/cookie")
+    @UseGuards(JwtAuthGuard)
+    async cookie(
+        @Req() req: any,
+        @Res() res: any) {
+        try {
+            const {access_token} = await this.createAccessToken(await this.authService.findByEmail(req.user.email));
+            let cookie = this.createCookie(true);
+            //rgpd is in token so we need to update it
+            res.cookie("token", access_token, cookie);
+        } catch (e) {
+            await CrudUtils.antiAttack();
+            throw e;
+        }
+        return res.send();
+    }
+
+    @Put("/rgpd/unset")
+    @UseGuards(JwtAuthGuard)
+    async unsetRgpd(
+        @Req() req: any,
+        @Res() res: any) {
+        try {
+            req.user.rgpd = null
+            await this.authService?.update(req.user)
+            const {payload, access_token} = await this.createAccessToken(req.user);
+            let cookie = this.createCookie(true);
+            //rgpd is in token so we need to update it
+            res.cookie("token", access_token, cookie);
+        } catch (e) {
+            await CrudUtils.antiAttack();
+            throw e;
+        }
+        return res.send();
+    }
+
+    @Put("/rgpd/accept")
+    @UseGuards(JwtAuthGuard)
+    async acceptRgpd(
+        @Req() req: any,
+        @Res() res: any) {
+        try {
+            req.user.rgpd = true
+            await this.authService?.update(req.user)
+            const {payload, access_token} = await this.createAccessToken(req.user);
+            let cookie = this.createCookie(true);
+            //rgpd is in token so we need to update it
+            res.cookie("token", access_token, cookie);
+        } catch (e) {
+            await CrudUtils.antiAttack();
+            throw e;
+        }
+        return res.send();
+    }
+
+    @Put("/rgpd/refuse")
+    @UseGuards(JwtAuthGuard)
+    async refuseRgpd(
+        @Req() req: any,
+        @Res() res: any
+    ) {
+        try {
+            //user is huge remove candidate file
+            req.user.rgpd = false
+            await this.authService?.update(req.user)
+            const {payload, access_token} = await this.createAccessToken(req.user);
+            let cookie = this.createCookie(true);
+            //rgpd is in token so we need to update it
+            res.cookie("token", access_token, cookie);
+        } catch (e) {
+            await CrudUtils.antiAttack();
+            throw e;
+        }
+        return res.send();
+    }
+
     /**
      * Create auth cookie
      * @param remember
@@ -293,3 +374,4 @@ export class EmailController {
     }
 
 }
+

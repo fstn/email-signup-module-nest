@@ -56,7 +56,7 @@ export class LocalePublicController implements CrudController<Locale> {
 
 
     @Get("csv")
-    async getCsv(@Res() response: Response,) {
+    async getCsv(@Res() response: Response) {
         const data = await getManager().query("select id,value from locale")
         const json2csv = new Parser();
         const csv = json2csv.parse(data);

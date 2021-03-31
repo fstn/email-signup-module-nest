@@ -9,3 +9,4 @@ export * from './auth.module';
 export * from './user-role.entity';
 export * from './user.entity';
 export * from './user.strategy';
+export * from './request-with-user';

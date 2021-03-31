@@ -10,7 +10,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
             jwtFromRequest: ExtractJwt.fromExtractors([
                 ExtractJwt.fromUrlQueryParameter("access_token"),
                 (req) => {
-                    if (!req.cookies) {
+                    if (!req.cookies && process.env.NODE_ENV !== "test") {
                         console.log("Cookies are empty, please verify that your app is using cookie-parser ")
                     }
                     return req?.cookies?.token
