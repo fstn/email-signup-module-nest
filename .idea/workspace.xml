@@ -22,20 +22,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fdc1c3f0-c4b2-41ab-83fa-21790e8809d3" name="Default Changelist" comment="">
+    <list default="true" id="fdc1c3f0-c4b2-41ab-83fa-21790e8809d3" name="Default Changelist" comment="Add backupConnectedAt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/auth/email.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/email.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/interfaces/base-auth-service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/interfaces/base-auth-service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/request-with-user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/request-with-user.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/services/user.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/services/user.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/services/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/services/user.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/user.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/user.entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jwt/jwt.strategy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/jwt/jwt.strategy.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locale/locale.public.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/locale/locale.public.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/user.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn-error.log" beforeDir="false" afterPath="$PROJECT_DIR$/yarn-error.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/guards/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/guards/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/guards/optional-jwt-auth.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/guards/optional-jwt-auth.guard.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +60,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="TF_FMT" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/auth/interfaces" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/auth/guards" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.stylelint" value="true" />
@@ -91,18 +82,18 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/auth/interfaces" />
-      <recent name="$PROJECT_DIR$/src/event" />
-      <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/src/email/dtos" />
-      <recent name="$PROJECT_DIR$/src/jwt/factory" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/auth/guards" />
       <recent name="$PROJECT_DIR$/src/jwt" />
       <recent name="$PROJECT_DIR$/src/jwt/interface" />
       <recent name="$PROJECT_DIR$/src/auth" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/auth/guards" />
+      <recent name="$PROJECT_DIR$/src/auth/interfaces" />
+      <recent name="$PROJECT_DIR$/src/event" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/email/dtos" />
     </key>
   </component>
   <component name="RunManager" selected="Jest.user.service.spec.ts">
@@ -194,7 +185,11 @@
       <workItem from="1616500511675" duration="434000" />
       <workItem from="1616593456064" duration="572000" />
       <workItem from="1617124913436" duration="1803000" />
-      <workItem from="1617208052563" duration="27000" />
+      <workItem from="1617208052563" duration="1356000" />
+      <workItem from="1618435422948" duration="632000" />
+      <workItem from="1619008623762" duration="902000" />
+      <workItem from="1619016550112" duration="593000" />
+      <workItem from="1619104696979" duration="1364000" />
     </task>
     <task id="LOCAL-00001" summary="Add  module">
       <created>1609240719386</created>
@@ -245,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612454699831</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Add backupConnectedAt">
+      <created>1617208139324</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1617208139324</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,13 +270,10 @@
     <MESSAGE value="Add  dist" />
     <MESSAGE value="Add dynamic config" />
     <MESSAGE value="Add Locale module&#10;Add Amplitude module" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Locale module&#10;Add Amplitude module" />
+    <MESSAGE value="Add backupConnectedAt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add backupConnectedAt" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="594" y="298" key="#Inspections" timestamp="1609246242256">
-      <screen x="0" y="0" width="1920" height="1200" />
-    </state>
-    <state x="594" y="298" key="#Inspections/0.0.1920.1200@0.0.1920.1200" timestamp="1609246242256" />
     <state x="424" y="230" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1610550171374">
       <screen x="0" y="25" width="1920" height="1090" />
     </state>
@@ -284,10 +283,6 @@
     </state>
     <state x="773" y="335" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1200@0.0.1920.1200" timestamp="1612443541909" />
     <state x="773" y="329" key="#com.intellij.ide.util.MemberChooser/0.25.1920.1090@0.25.1920.1090" timestamp="1610551498740" />
-    <state x="707" y="475" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1609246188130">
-      <screen x="0" y="0" width="1920" height="1200" />
-    </state>
-    <state x="707" y="475" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1200@0.0.1920.1200" timestamp="1609246188130" />
     <state x="100" y="128" width="1720" height="972" key="DiffContextDialog" timestamp="1612444729993">
       <screen x="0" y="25" width="1920" height="1086" />
     </state>
@@ -373,14 +368,10 @@
     </state>
     <state width="1899" height="411" key="GridCell.Tab.3.right/0.0.1920.1200@0.0.1920.1200" timestamp="1615900890127" />
     <state width="1899" height="368" key="GridCell.Tab.3.right/0.25.1920.1090@0.25.1920.1090" timestamp="1610551072627" />
-    <state x="469" y="250" key="SettingsEditor" timestamp="1609246520410">
+    <state x="560" y="338" key="Vcs.Push.Dialog.v2" timestamp="1617208141942">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state x="469" y="250" key="SettingsEditor/0.0.1920.1200@0.0.1920.1200" timestamp="1609246520410" />
-    <state x="560" y="338" key="Vcs.Push.Dialog.v2" timestamp="1612454702150">
-      <screen x="0" y="0" width="1920" height="1200" />
-    </state>
-    <state x="560" y="338" key="Vcs.Push.Dialog.v2/0.0.1920.1200@0.0.1920.1200" timestamp="1612454702150" />
+    <state x="560" y="338" key="Vcs.Push.Dialog.v2/0.0.1920.1200@0.0.1920.1200" timestamp="1617208141942" />
     <state x="100" y="128" width="1720" height="972" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1612444729994">
       <screen x="0" y="25" width="1920" height="1086" />
     </state>
@@ -390,19 +381,14 @@
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
     <state x="100" y="128" width="1720" height="972" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1200@0.0.1920.1200" timestamp="1611151095312" />
-    <state x="705" y="353" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1609240781293">
+    <state x="662" y="210" width="595" height="674" key="find.popup" timestamp="1618435457449">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state x="705" y="353" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/0.0.1920.1200@0.0.1920.1200" timestamp="1609240781293" />
-    <state x="662" y="210" width="595" height="674" key="find.popup" timestamp="1617128806237">
-      <screen x="0" y="0" width="1920" height="1200" />
-    </state>
-    <state x="662" y="210" width="595" height="674" key="find.popup/0.0.1920.1200@0.0.1920.1200" timestamp="1617128806237" />
+    <state x="662" y="210" width="595" height="674" key="find.popup/0.0.1920.1200@0.0.1920.1200" timestamp="1618435457449" />
     <state x="662" y="155" width="595" height="686" key="find.popup/0.25.1920.1090@0.25.1920.1090" timestamp="1610545975790" />
-    <state x="625" y="292" width="670" height="676" key="search.everywhere.popup" timestamp="1617198466655">
+    <state x="625" y="292" width="670" height="676" key="search.everywhere.popup" timestamp="1619104716602">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state x="625" y="292" width="670" height="676" key="search.everywhere.popup/0.0.1920.1200@0.0.1920.1200" timestamp="1617198466655" />
-    <state x="625" y="290" width="670" height="615" key="search.everywhere.popup/0.25.1920.1090@0.25.1920.1090" timestamp="1609439763272" />
+    <state x="625" y="292" width="670" height="676" key="search.everywhere.popup/0.0.1920.1200@0.0.1920.1200" timestamp="1619104716602" />
   </component>
 </project>

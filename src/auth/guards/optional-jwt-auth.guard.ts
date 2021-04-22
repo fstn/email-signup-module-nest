@@ -3,7 +3,7 @@ import {ExecutionContext, Inject, Injectable, InternalServerErrorException} from
 import {AuthGuard} from '@nestjs/passport';
 
 @Injectable()
-export class JwtAuthGuard extends AuthGuard('jwt') {
+export class OptionalJwtAuthGuard extends AuthGuard('jwt') {
   constructor(
       @Inject( "BaseAuthService")
       private readonly authService:any) {
@@ -18,7 +18,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     const request = context.switchToHttp().getRequest();
     result = result  && this.authService.canActivate(request)
     await this.authService?.setUserOnRequest?.(request)
-    return result
+    return true
   }
 
 }
