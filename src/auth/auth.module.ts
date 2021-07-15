@@ -16,9 +16,10 @@ import {BaseAuthService} from "./interfaces/base-auth-service";
 import {BaseFacebookConfiguration} from "./interfaces/base-facebook-configuration";
 import {BaseGoogleConfiguration} from "./interfaces/base-google-configuration";
 import {BaseSendGridConfiguration} from "./interfaces/base-send-grid-configuration";
+import {RegisterService} from "./services/register.service";
 import {UserService} from "./services/user.service";
 import {UserStrategy} from "./user.strategy";
-
+import {GoogleRecaptchaModule, GoogleRecaptchaNetwork} from "@nestlab/google-recaptcha"
 
 @Module({})
 export class AuthModule {
@@ -29,6 +30,13 @@ export class AuthModule {
             module: AuthModule,
             imports: [
                 ...options.imports,
+                GoogleRecaptchaModule.forRoot({
+                    secretKey: process.env.GOOGLE_RECAPTCHA_SECRET_KEY || "6LdxgwcUAAAAAG6KiYbTdd-cwE_2bmjQ-3osEgsB",
+                    response: req => req.headers.recaptcha,
+                    skipIf: process.env.NODE_ENV !== 'production',
+                    network: GoogleRecaptchaNetwork.Recaptcha,
+                    agent: undefined
+                }),
                 LocaleModule,
                 EventModule.registerAsync(options),
                 NestJwtModule.registerAsync({
@@ -41,6 +49,7 @@ export class AuthModule {
             ],
             controllers: [EmailController],
             providers: [
+                RegisterService,
                 UserService,
                 FacebookStrategy,
                 GoogleStrategy,
@@ -70,7 +79,7 @@ export class AuthModule {
                     useClass: options.useSendGridConfig,
                 },
             ],
-            exports: [],
+            exports: [UserService,RegisterService],
         };
     }
 }

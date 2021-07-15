@@ -6,5 +6,5 @@ export class Locale {
     public id!: string;
 
     @Column({nullable: true, type: "text"})
-    public value!: string
+    public value?: string
 }

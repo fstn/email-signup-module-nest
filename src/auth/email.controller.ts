@@ -15,11 +15,13 @@ import {
 } from "@nestjs/common";
 import {JwtService} from "@nestjs/jwt";
 import {AuthGuard} from "@nestjs/passport";
+import {Recaptcha} from "@nestlab/google-recaptcha";
 import {InjectSendGrid, SendGridService} from "@ntegral/nestjs-sendgrid";
 import {Request, Response} from "express";
 import {ChangePasswordDto, CreateEmailDto, VerifyCodeDto} from "../email/dtos";
 import {PreLoginDto} from "../email/dtos/pre-login.dto";
 import {EmailService} from "../email/email.service";
+import {SendGridWrapper} from "../email/sendGrid.wrapper";
 import {InvalidCodeError, UserAlreadyExistsError} from "../errors";
 import {EventService} from "../event/event.service";
 import {CrudUtils} from "../utils/crud.utils";
@@ -31,6 +33,7 @@ import {
     BaseSendGridConfiguration
 } from "./interfaces";
 import {UserService} from "./services";
+import {RegisterService} from "./services/register.service";
 import {User} from "./user.entity";
 
 
@@ -46,29 +49,23 @@ export class EmailController {
         private readonly facebookConfiguration: BaseFacebookConfiguration,
         private readonly googleConfiguration: BaseGoogleConfiguration,
         private readonly eventService: EventService,
-        private jwtService: JwtService,
-        @InjectSendGrid() private readonly sendGridService: SendGridService
+        private readonly jwtService: JwtService,
+        private readonly sendGridService: SendGridWrapper,
+        private readonly registerService: RegisterService
     ) {
     }
 
     @Post("/register-email")
+    @Recaptcha()
     async registerEmail(
         @Req() req: any,
         @Body() createEmailDto: CreateEmailDto
     ) {
         try {
             await this.userService.throwErrorIfExists(createEmailDto.email)
-
-            const email = await this.emailService.create(createEmailDto);
             await this.eventService.log({event_type:"register.email",user_id:createEmailDto.email})
-            const msg = {
-                to: createEmailDto.email,
-                from: this.sendGridConfig.emails.signup, // Use the email address or domain you verified above
-                subject: this.sendGridConfig.emails.signup.subject, //'Validate your email',
-                text: this.sendGridConfig.emails.signup.text(email.code), //`This is your code: ${email.code}`,
-                html: this.sendGridConfig.emails.signup.html(email.code) //`This is your code: ${email.code}`,
-            };
-            await this.sendGridService.send(msg);
+
+           return this.registerService.registerEmail(createEmailDto)
         } catch (e) {
             await CrudUtils.antiAttack();
             throw e;
@@ -81,7 +78,7 @@ export class EmailController {
         @Body() verifyCodeDto: VerifyCodeDto
     ): Promise<void> {
         try {
-            await this.eventService.log({event_type:"register.code",user_id:verifyCodeDto.email})
+            await this.eventService.log({event_type: "register.code", user_id: verifyCodeDto.email})
             return await this.emailService.verifyCode(verifyCodeDto);
         } catch (e) {
             await CrudUtils.antiAttack();
@@ -89,31 +86,30 @@ export class EmailController {
         }
     }
 
+    /**
+     * Register new User
+     * @param req
+     * @param createUserDto
+     */
     @Post("/register")
     async register(
         @Req() req: any,
         @Body() createUserDto: any
     ): Promise<User> {
         try {
-            await this.eventService.log({event_type:"register",user_id:createUserDto.email})
-            const emailEntity = await this.emailService.findOne({
-                where: {
-                    email: createUserDto.email,
-                    code: createUserDto.code
-                }
-            })
-            if (!emailEntity) {
-                throw InvalidCodeError
-            }
-
-            const user = await this.authService?.create(createUserDto)
-            return user
+            await this.eventService.log({event_type: "register", user_id: createUserDto.email})
+            return this.registerService.register(createUserDto)
         } catch (e) {
             await CrudUtils.antiAttack();
             throw e;
         }
     }
 
+    /**
+     * Verify Email for forgot Password
+     * @param req
+     * @param createEmailDto
+     */
     @Post("/forgot-password-email")
     async forgotPasswordEmail(
         @Req() req: any,
@@ -139,6 +135,11 @@ export class EmailController {
         }
     }
 
+    /**
+     * Verify Code for forgot password
+     * @param req
+     * @param verifyCodeDto
+     */
     @Post("/forgot-password-code")
     async forgotPasswordCode(
         @Req() req: any,
@@ -152,13 +153,18 @@ export class EmailController {
         }
     }
 
+    /**
+     * Change Password
+     * @param req
+     * @param changePasswordDto
+     */
     @Post("/forgot-password")
-    async changePassword(
+    async forgotPassword(
         @Req() req: any,
         @Body() changePasswordDto: ChangePasswordDto
     ): Promise<User> {
         try {
-            await this.eventService.log({event_type:"forget.password",user_id:changePasswordDto.email})
+            await this.eventService.log({event_type: "forget.password", user_id: changePasswordDto.email})
             const email = await this.emailService.findOne({
                 where: {
                     email: changePasswordDto.email,
@@ -175,9 +181,14 @@ export class EmailController {
         }
     }
 
+    /**
+     * Pre Login
+     * @param req
+     * @param preLoginDto
+     */
     @Post("/pre-login")
-    async preLogin(  @Req() req: any,
-                     @Body() preLoginDto: PreLoginDto
+    async preLogin(@Req() req: any,
+                   @Body() preLoginDto: PreLoginDto
     ): Promise<boolean> {
         try {
             const user = await this.authService.findByEmail(preLoginDto.email)
@@ -188,50 +199,50 @@ export class EmailController {
         }
     }
 
+    /**
+     * Login
+     * @param req
+     * @param res
+     */
     @Post("/login")
     @UseGuards(LocalAuthGuard)
     async signIn(@Req() req: any, @Res() res: Response): Promise<any> {
-        const {payload, access_token} = await this.createAccessToken(req.user);
-        await this.eventService.log({event_type: "login", user_id: req?.user?.email})
-        req.user.backupConnectedAt = req.user.connectedAt || new Date(0);
-        req.user.connectedAt = new Date();
-        await this.userService.update(req.user)
-        let cookie = this.createCookie(req.body.remember);
-        res.cookie("token", access_token, cookie);
-        return res.send({payload, access_token});
+        await this.eventService.log({event_type: "login", user_id: req.user?.email})
+        return await this.userService.signIn(req.user, req.body.remember, res);
     }
 
+    /**
+     * Logout
+     * @param req
+     * @param res
+     */
     @Delete("/login")
     async logout(@Req() req: any, @Res() res: Response): Promise<any> {
-        let cookie = this.createCookie(true);
         await this.eventService.log({event_type: "logout", user_id: req?.user?.email})
-        res.cookie("token", undefined, cookie);
-        return res.send();
+        return this.userService.logout(res);
     }
 
-    private async createAccessToken(createEmailDto: any) {
-        const user = await this.authService.findByEmail(createEmailDto.email)
-        if (!user) {
-            throw new UnauthorizedException()
-        }
-        const payload = await this.authService?.login(user);
-        const access_token = this.jwtService.sign(payload)
-        return {payload, access_token};
-    }
-
+    /**
+     * Facebook Login
+     */
     @Get("/facebook")
     @UseGuards(AuthGuard("facebook"))
     async facebookLogin(): Promise<any> {
         return HttpStatus.OK;
     }
 
+    /**
+     * Redirect for Facebook OAuth
+     * @param req
+     * @param res
+     */
     @Get("/facebook/redirect")
     @UseGuards(AuthGuard("facebook"))
     async facebookLoginRedirect(@Req() req: Request, @Res() res: Response): Promise<any> {
 
         const createEmailDto = req.user as CreateEmailDto
         try {
-            await this.eventService.log({event_type:"login.facebook",user_id:createEmailDto.email})
+            await this.eventService.log({event_type: "login.facebook", user_id: createEmailDto.email})
             await this.userService.throwErrorIfExists(createEmailDto.email)
             const email = await this.emailService.create(createEmailDto);
             return res.redirect(this.facebookConfiguration.config.registerUrlFactory({...email, ...createEmailDto}));
@@ -249,13 +260,18 @@ export class EmailController {
     async googleAuth(@Req() req: Request) {
     }
 
+    /**
+     * Redirect for Google OAuth
+     * @param req
+     * @param res
+     */
     @Get('/google/redirect')
     @UseGuards(AuthGuard('google'))
     async googleAuthRedirect(@Req() req: Request, @Res() res: Response): Promise<any> {
 
         const createEmailDto = req.user as CreateEmailDto
         try {
-            await this.eventService.log({event_type:"login.google",user_id:createEmailDto.email})
+            await this.eventService.log({event_type: "login.google", user_id: createEmailDto.email})
             await this.userService.throwErrorIfExists(createEmailDto.email)
             const email = await this.emailService.create(createEmailDto);
             return res.redirect(this.googleConfiguration.config.registerUrlFactory({...email, ...createEmailDto}));
@@ -268,14 +284,19 @@ export class EmailController {
 
     }
 
+    /**
+     * Set cookie on request
+     * @param req
+     * @param res
+     */
     @Get("/cookie")
     @UseGuards(JwtAuthGuard)
     async cookie(
         @Req() req: any,
         @Res() res: any) {
         try {
-            const {access_token} = await this.createAccessToken(await this.authService.findByEmail(req.user.email));
-            let cookie = this.createCookie(true);
+            const {access_token} = await this.userService.createAccessToken(await this.authService.findByEmail(req.user.email));
+            let cookie = this.userService.createCookie(true);
             //rgpd is in token so we need to update it
             res.cookie("token", access_token, cookie);
         } catch (e) {
@@ -285,6 +306,11 @@ export class EmailController {
         return res.send();
     }
 
+    /**
+     * Remove RGPD
+     * @param req
+     * @param res
+     */
     @Put("/rgpd/unset")
     @UseGuards(JwtAuthGuard)
     async unsetRgpd(
@@ -293,8 +319,8 @@ export class EmailController {
         try {
             req.user.rgpd = null
             await this.authService?.update(req.user)
-            const {payload, access_token} = await this.createAccessToken(req.user);
-            let cookie = this.createCookie(true);
+            const {payload, access_token} = await this.userService.createAccessToken(req.user);
+            let cookie = this.userService.createCookie(true);
             //rgpd is in token so we need to update it
             res.cookie("token", access_token, cookie);
         } catch (e) {
@@ -304,6 +330,11 @@ export class EmailController {
         return res.send();
     }
 
+    /**
+     * Accept RGPD
+     * @param req
+     * @param res
+     */
     @Put("/rgpd/accept")
     @UseGuards(JwtAuthGuard)
     async acceptRgpd(
@@ -312,8 +343,8 @@ export class EmailController {
         try {
             req.user.rgpd = true
             await this.authService?.update(req.user)
-            const {payload, access_token} = await this.createAccessToken(req.user);
-            let cookie = this.createCookie(true);
+            const {payload, access_token} = await this.userService.createAccessToken(req.user);
+            let cookie = this.userService.createCookie(true);
             //rgpd is in token so we need to update it
             res.cookie("token", access_token, cookie);
         } catch (e) {
@@ -333,8 +364,8 @@ export class EmailController {
             //user is huge remove candidate file
             req.user.rgpd = false
             await this.authService?.update(req.user)
-            const {payload, access_token} = await this.createAccessToken(req.user);
-            let cookie = this.createCookie(true);
+            const {payload, access_token} = await this.userService.createAccessToken(req.user);
+            let cookie = this.userService.createCookie(true);
             //rgpd is in token so we need to update it
             res.cookie("token", access_token, cookie);
         } catch (e) {
@@ -345,31 +376,14 @@ export class EmailController {
     }
 
     /**
-     * Create auth cookie
-     * @param remember
-     * @private
-     */
-    private createCookie(remember: boolean) {
-        let cookie = {maxAge: 0, httpOnly: true}
-        if (remember) {
-            cookie = {
-                maxAge: 4 * 30 * 24 * 60 * 60,
-                httpOnly: true
-            }
-        }
-        return cookie;
-    }
-
-
-    /**
      * Log user and redirect it if he already exists in app
      * @param req
      * @param res
      * @private
      */
     private async redirectIfAlreadyExists(createEmailDto: CreateEmailDto, res: Response, callBack: Function) {
-        const {payload, access_token} = await this.createAccessToken(createEmailDto);
-        let cookie = this.createCookie(true);
+        const {payload, access_token} = await this.userService.createAccessToken(createEmailDto);
+        let cookie = this.userService.createCookie(true);
         res.cookie("token", access_token, cookie);
         return res.redirect(callBack(payload, access_token));
     }

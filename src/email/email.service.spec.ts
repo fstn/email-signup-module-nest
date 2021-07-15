@@ -1,4 +1,5 @@
 import {Test, TestingModule} from '@nestjs/testing';
+import {BaseAmplitudeConfiguration} from "../auth/interfaces";
 import {InvalidCodeError} from "../errors";
 import {getUseValueRepository} from "../utils/test";
 import {CreateEmailDto} from "./dtos/create-email.dto";
@@ -16,11 +17,15 @@ describe('EmailService', () => {
                 {
                     provide: EmailRepository,
                     useValue: getUseValueRepository()
+                },
+                {
+                    provide:BaseAmplitudeConfiguration,
+                    useValue:{}
                 }],
         }).compile();
 
-        service = module.get<EmailService>(EmailService) as EmailService;
-        repo = module.get<EmailRepository>(EmailRepository) as EmailRepository;
+        service = await module.get<EmailService>(EmailService) as EmailService;
+        repo = await module.get<EmailRepository>(EmailRepository) as EmailRepository;
     });
 
     it('should be defined', () => {
@@ -53,10 +58,21 @@ describe('EmailService', () => {
     });
 
 
-    it('create should be ok', async () => {
+    it('create should be ok and code must not be yopmail one', async () => {
+        const dto = new CreateEmailDto()
+        dto.email = "test@gmail.com"
+        repo.save.mockImplementation((e:any)=>e)
+        const result = await service.create(dto)
+        expect(repo.save).toHaveBeenCalled()
+        expect(result.code).not.toBe("1111")
+    });
+
+    it('create should be ok and code must be 1111 because it\'s yopmail', async () => {
         const dto = new CreateEmailDto()
         dto.email = "test@yopmail.com"
-        await service.create(dto)
+        repo.save.mockImplementation((e:any)=>e)
+        const result = await service.create(dto)
         expect(repo.save).toHaveBeenCalled()
+        expect(result.code).toBe("1111")
     });
 });

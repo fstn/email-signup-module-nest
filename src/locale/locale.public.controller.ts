@@ -24,6 +24,30 @@ export const LocalePublicControllerOptions: CrudOptions = {
     }
 }
 
+
+export function mapLocale(locale: Locale) {
+
+    if (locale.value === undefined) {
+        const regex = /(.*)\..*\.html/gm;
+        let m;
+
+        let idAsLocaleValue = locale.id
+        m = regex.exec(idAsLocaleValue)
+        if (m !== null) {
+            // This is necessary to avoid infinite loops with zero-width matches
+            if (m.index === regex.lastIndex) {
+                regex.lastIndex++;
+            }
+            return ({[locale.id]: m[1] || locale.id});
+        } else {
+            return ({[locale.id]: locale.id});
+        }
+
+    } else {
+        return ({[locale.id]: locale.value});
+    }
+}
+
 /**
  * Return ProgramType formatted as
  * {}
@@ -50,7 +74,8 @@ export class LocalePublicController implements CrudController<Locale> {
         const r = await this?.base?.getManyBase(req);
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        return Object.assign({}, ...r.map((locale: Locale) => ({[locale.id]: locale.value || locale.id})))
+
+        return Object.assign({}, ...r.map(mapLocale))
 
     }
 

@@ -1,11 +1,13 @@
+import {JwtService} from "@nestjs/jwt";
+import {EmailService} from "../../email";
 import {UserAlreadyExistsError} from "../../errors";
 import {BaseAuthService} from "../interfaces";
-import {BaseFacebookConfiguration} from "../interfaces/base-facebook-configuration";
-import {BaseGoogleConfiguration} from "../interfaces/base-google-configuration";
 import {UserService} from "./user.service";
 
 let userService: UserService
 let authService: BaseAuthService
+let jwtService: JwtService;
+let emailService: EmailService
 
 describe('UserService', () => {
     beforeAll(async (done) => {
@@ -20,7 +22,14 @@ describe('UserService', () => {
             validateUser: jest.fn(),
             canActivate: jest.fn()
         }
-        userService = new UserService(authService)
+        jwtService = {
+            getSecretKey: undefined,
+            logger: undefined,
+            mergeJwtOptions: undefined,
+            options: undefined,
+        } as any
+        emailService = {} as any
+        userService = new UserService(jwtService,authService, emailService)
 
         done();
     })

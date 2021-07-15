@@ -3,6 +3,7 @@ import {TypeOrmModule} from "@nestjs/typeorm";
 import {AuthModule} from "../auth";
 import {Email} from "./email.entity";
 import {EmailService} from './email.service';
+import {SendGridWrapper} from "./sendGrid.wrapper";
 
 export type EmailModuleOptions = {
 } ;
@@ -14,8 +15,8 @@ export class EmailModule {
         return {
             module:EmailModule,
             imports:[TypeOrmModule.forFeature([Email]), AuthModule],
-            providers: [EmailService],
-            exports: [EmailService]
+            providers: [EmailService,SendGridWrapper],
+            exports: [EmailService,SendGridWrapper]
         }
     }
 }

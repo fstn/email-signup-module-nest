@@ -23,10 +23,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fdc1c3f0-c4b2-41ab-83fa-21790e8809d3" name="Default Changelist" comment="Add backupConnectedAt">
+      <change afterPath="$PROJECT_DIR$/src/auth/services/register.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/auth.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/auth.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/auth/email.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/email.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/guards/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/guards/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/auth/guards/optional-jwt-auth.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/guards/optional-jwt-auth.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/services/user.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/services/user.service.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/services/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/services/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/email/email.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/email/email.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/email/email.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/email/email.service.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/email/email.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/email/email.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/email/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/email/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/email/sendGrid.wrapper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/email/sendGrid.wrapper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/event/event.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/event.service.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locale/locale.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/locale/locale.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locale/locale.public.controller.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/locale/locale.public.controller.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locale/locale.public.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/locale/locale.public.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/crud.utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/crud.utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,8 +110,62 @@
       <recent name="$PROJECT_DIR$/src/email/dtos" />
     </key>
   </component>
-  <component name="RunManager" selected="Jest.user.service.spec.ts">
-    <configuration name="UserService" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Jest.EmailService.create should be ok and code must not be yopmail one">
+    <configuration name="EmailService" type="JavaScriptTestRunnerJest" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/src/email/email.service.spec.ts" />
+      <test-names>
+        <test-name value="EmailService" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="EmailService.create should be ok and code must not be yopmail one" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/email/email.service.spec.ts" />
+      <test-names>
+        <test-name value="EmailService" />
+        <test-name value="create should be ok and code must not be yopmail one" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="LocalePublicController" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/src/locale/locale.public.controller.spec.ts" />
+      <test-names>
+        <test-name value="LocalePublicController" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="LocalePublicController.mapLocale should extract locale from id" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/locale/locale.public.controller.spec.ts" />
+      <test-names>
+        <test-name value="LocalePublicController" />
+        <test-name value="mapLocale should extract locale from id" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="UserService" type="JavaScriptTestRunnerJest" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
@@ -110,17 +178,14 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="should throw an exception if user exists" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="locale.public.controller.spec.ts" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/src/auth/services/user.service.spec.ts" />
-      <test-names>
-        <test-name value="should throw an exception if user exists" />
-      </test-names>
+      <scope-kind value="TEST_FILE" />
+      <test-file value="$PROJECT_DIR$/src/locale/locale.public.controller.spec.ts" />
       <method v="2" />
     </configuration>
     <configuration name="user.service.spec.ts" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
@@ -134,15 +199,21 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Jest.should throw an exception if user exists" />
-      <item itemvalue="Jest.user.service.spec.ts" />
+      <item itemvalue="Jest.EmailService" />
       <item itemvalue="Jest.UserService" />
+      <item itemvalue="Jest.user.service.spec.ts" />
+      <item itemvalue="Jest.LocalePublicController.mapLocale should extract locale from id" />
+      <item itemvalue="Jest.locale.public.controller.spec.ts" />
+      <item itemvalue="Jest.LocalePublicController" />
+      <item itemvalue="Jest.EmailService.create should be ok and code must not be yopmail one" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Jest.EmailService.create should be ok and code must not be yopmail one" />
+        <item itemvalue="Jest.LocalePublicController.mapLocale should extract locale from id" />
+        <item itemvalue="Jest.LocalePublicController" />
+        <item itemvalue="Jest.locale.public.controller.spec.ts" />
         <item itemvalue="Jest.user.service.spec.ts" />
-        <item itemvalue="Jest.UserService" />
-        <item itemvalue="Jest.should throw an exception if user exists" />
       </list>
     </recent_temporary>
   </component>
@@ -189,7 +260,21 @@
       <workItem from="1618435422948" duration="632000" />
       <workItem from="1619008623762" duration="902000" />
       <workItem from="1619016550112" duration="593000" />
-      <workItem from="1619104696979" duration="1364000" />
+      <workItem from="1619104696979" duration="2894000" />
+      <workItem from="1619135741620" duration="2369000" />
+      <workItem from="1619390180875" duration="2796000" />
+      <workItem from="1619635666913" duration="3305000" />
+      <workItem from="1621261397602" duration="49000" />
+      <workItem from="1621263048030" duration="863000" />
+      <workItem from="1621291824599" duration="1401000" />
+      <workItem from="1621596689169" duration="2550000" />
+      <workItem from="1623423375371" duration="2396000" />
+      <workItem from="1623460951396" duration="832000" />
+      <workItem from="1623703396732" duration="1364000" />
+      <workItem from="1626208796152" duration="119000" />
+      <workItem from="1626220138162" duration="85000" />
+      <workItem from="1626223242234" duration="527000" />
+      <workItem from="1626379570012" duration="2698000" />
     </task>
     <task id="LOCAL-00001" summary="Add  module">
       <created>1609240719386</created>
@@ -247,7 +332,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617208139324</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Add optional jwt guard">
+      <created>1619108115252</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1619108115252</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -271,124 +363,139 @@
     <MESSAGE value="Add dynamic config" />
     <MESSAGE value="Add Locale module&#10;Add Amplitude module" />
     <MESSAGE value="Add backupConnectedAt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add backupConnectedAt" />
+    <MESSAGE value="Add optional jwt guard" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add optional jwt guard" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="424" y="230" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1610550171374">
-      <screen x="0" y="25" width="1920" height="1090" />
-    </state>
-    <state x="424" y="230" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.25.1920.1090@0.25.1920.1090" timestamp="1610550171374" />
-    <state x="773" y="335" key="#com.intellij.ide.util.MemberChooser" timestamp="1612443541909">
+    <state x="424" y="260" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1623424684880">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state x="773" y="335" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1200@0.0.1920.1200" timestamp="1612443541909" />
-    <state x="773" y="329" key="#com.intellij.ide.util.MemberChooser/0.25.1920.1090@0.25.1920.1090" timestamp="1610551498740" />
-    <state x="100" y="128" width="1720" height="972" key="DiffContextDialog" timestamp="1612444729993">
-      <screen x="0" y="25" width="1920" height="1086" />
-    </state>
-    <state x="100" y="128" width="1720" height="972" key="DiffContextDialog/0.0.1920.1200@0.0.1920.1200" timestamp="1612444083078" />
-    <state x="100" y="128" width="1720" height="972" key="DiffContextDialog/0.25.1920.1086@0.25.1920.1086" timestamp="1612444729993" />
-    <state width="1899" height="411" key="GridCell.Tab.0.bottom" timestamp="1615900890123">
+    <state x="424" y="260" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1200@0.0.1920.1200" timestamp="1623424684880" />
+    <state x="100" y="100" width="1720" height="1000" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1623427303441">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state width="1899" height="411" key="GridCell.Tab.0.bottom/0.0.1920.1200@0.0.1920.1200" timestamp="1615900890123" />
-    <state width="1899" height="368" key="GridCell.Tab.0.bottom/0.25.1920.1090@0.25.1920.1090" timestamp="1610551072625" />
-    <state width="1899" height="411" key="GridCell.Tab.0.center" timestamp="1615900890121">
+    <state x="100" y="100" width="1720" height="1000" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1920.1200@0.0.1920.1200" timestamp="1623427303441" />
+    <state x="773" y="321" key="#com.intellij.ide.util.MemberChooser" timestamp="1626379878764">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state width="1899" height="411" key="GridCell.Tab.0.center/0.0.1920.1200@0.0.1920.1200" timestamp="1615900890121" />
-    <state width="1899" height="368" key="GridCell.Tab.0.center/0.25.1920.1090@0.25.1920.1090" timestamp="1610551072624" />
-    <state width="1899" height="411" key="GridCell.Tab.0.left" timestamp="1615900890121">
+    <state x="773" y="321" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1200@0.0.1920.1200" timestamp="1626379878764" />
+    <state x="723" y="310" key="#xdebugger.evaluate" timestamp="1623425228122">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state width="1899" height="411" key="GridCell.Tab.0.left/0.0.1920.1200@0.0.1920.1200" timestamp="1615900890121" />
-    <state width="1899" height="368" key="GridCell.Tab.0.left/0.25.1920.1090@0.25.1920.1090" timestamp="1610551072623" />
-    <state width="1899" height="411" key="GridCell.Tab.0.right" timestamp="1615900890122">
+    <state x="723" y="310" key="#xdebugger.evaluate/0.0.1920.1200@0.0.1920.1200" timestamp="1623425228122" />
+    <state width="1407" height="466" key="DebuggerActiveHint" timestamp="1623424851163">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state width="1899" height="411" key="GridCell.Tab.0.right/0.0.1920.1200@0.0.1920.1200" timestamp="1615900890122" />
-    <state width="1899" height="368" key="GridCell.Tab.0.right/0.25.1920.1090@0.25.1920.1090" timestamp="1610551072624" />
-    <state width="1899" height="411" key="GridCell.Tab.1.bottom" timestamp="1615900890125">
+    <state width="1407" height="466" key="DebuggerActiveHint/0.0.1920.1200@0.0.1920.1200" timestamp="1623424851163" />
+    <state width="1899" height="422" key="GridCell.Tab.0.bottom" timestamp="1626382202571">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state width="1899" height="411" key="GridCell.Tab.1.bottom/0.0.1920.1200@0.0.1920.1200" timestamp="1615900890125" />
-    <state width="1899" height="368" key="GridCell.Tab.1.bottom/0.25.1920.1090@0.25.1920.1090" timestamp="1610551072627" />
-    <state width="1899" height="411" key="GridCell.Tab.1.center" timestamp="1615900890124">
+    <state width="1899" height="422" key="GridCell.Tab.0.bottom/0.0.1920.1200@0.0.1920.1200" timestamp="1626382202571" />
+    <state width="1899" height="422" key="GridCell.Tab.0.center" timestamp="1626382202569">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state width="1899" height="411" key="GridCell.Tab.1.center/0.0.1920.1200@0.0.1920.1200" timestamp="1615900890124" />
-    <state width="1899" height="368" key="GridCell.Tab.1.center/0.25.1920.1090@0.25.1920.1090" timestamp="1610551072626" />
-    <state width="1899" height="411" key="GridCell.Tab.1.left" timestamp="1615900890123">
+    <state width="1899" height="422" key="GridCell.Tab.0.center/0.0.1920.1200@0.0.1920.1200" timestamp="1626382202569" />
+    <state width="1899" height="422" key="GridCell.Tab.0.left" timestamp="1626382202568">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state width="1899" height="411" key="GridCell.Tab.1.left/0.0.1920.1200@0.0.1920.1200" timestamp="1615900890123" />
-    <state width="1899" height="368" key="GridCell.Tab.1.left/0.25.1920.1090@0.25.1920.1090" timestamp="1610551072625" />
-    <state width="1899" height="411" key="GridCell.Tab.1.right" timestamp="1615900890124">
+    <state width="1899" height="422" key="GridCell.Tab.0.left/0.0.1920.1200@0.0.1920.1200" timestamp="1626382202568" />
+    <state width="1899" height="422" key="GridCell.Tab.0.right" timestamp="1626382202570">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state width="1899" height="411" key="GridCell.Tab.1.right/0.0.1920.1200@0.0.1920.1200" timestamp="1615900890124" />
-    <state width="1899" height="368" key="GridCell.Tab.1.right/0.25.1920.1090@0.25.1920.1090" timestamp="1610551072626" />
-    <state width="1899" height="411" key="GridCell.Tab.2.bottom" timestamp="1615900890131">
+    <state width="1899" height="422" key="GridCell.Tab.0.right/0.0.1920.1200@0.0.1920.1200" timestamp="1626382202570" />
+    <state width="1899" height="422" key="GridCell.Tab.1.bottom" timestamp="1626382199423">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state width="1899" height="411" key="GridCell.Tab.2.bottom/0.0.1920.1200@0.0.1920.1200" timestamp="1615900890131" />
-    <state width="1899" height="368" key="GridCell.Tab.2.bottom/0.25.1920.1090@0.25.1920.1090" timestamp="1610551072628" />
-    <state width="1899" height="411" key="GridCell.Tab.2.center" timestamp="1615900890129">
+    <state width="1899" height="422" key="GridCell.Tab.1.bottom/0.0.1920.1200@0.0.1920.1200" timestamp="1626382199423" />
+    <state width="1899" height="422" key="GridCell.Tab.1.center" timestamp="1626382199421">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state width="1899" height="411" key="GridCell.Tab.2.center/0.0.1920.1200@0.0.1920.1200" timestamp="1615900890129" />
-    <state width="1899" height="368" key="GridCell.Tab.2.center/0.25.1920.1090@0.25.1920.1090" timestamp="1610551072627" />
-    <state width="1899" height="411" key="GridCell.Tab.2.left" timestamp="1615900890129">
+    <state width="1899" height="422" key="GridCell.Tab.1.center/0.0.1920.1200@0.0.1920.1200" timestamp="1626382199421" />
+    <state width="1899" height="422" key="GridCell.Tab.1.left" timestamp="1626382199420">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state width="1899" height="411" key="GridCell.Tab.2.left/0.0.1920.1200@0.0.1920.1200" timestamp="1615900890129" />
-    <state width="1899" height="368" key="GridCell.Tab.2.left/0.25.1920.1090@0.25.1920.1090" timestamp="1610551072627" />
-    <state width="1899" height="411" key="GridCell.Tab.2.right" timestamp="1615900890130">
+    <state width="1899" height="422" key="GridCell.Tab.1.left/0.0.1920.1200@0.0.1920.1200" timestamp="1626382199420" />
+    <state width="1899" height="422" key="GridCell.Tab.1.right" timestamp="1626382199422">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state width="1899" height="411" key="GridCell.Tab.2.right/0.0.1920.1200@0.0.1920.1200" timestamp="1615900890130" />
-    <state width="1899" height="368" key="GridCell.Tab.2.right/0.25.1920.1090@0.25.1920.1090" timestamp="1610551072628" />
-    <state width="1899" height="411" key="GridCell.Tab.3.bottom" timestamp="1615900890128">
+    <state width="1899" height="422" key="GridCell.Tab.1.right/0.0.1920.1200@0.0.1920.1200" timestamp="1626382199422" />
+    <state width="1899" height="422" key="GridCell.Tab.2.bottom" timestamp="1626382199304">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state width="1899" height="411" key="GridCell.Tab.3.bottom/0.0.1920.1200@0.0.1920.1200" timestamp="1615900890128" />
-    <state width="1899" height="368" key="GridCell.Tab.3.bottom/0.25.1920.1090@0.25.1920.1090" timestamp="1610551072627" />
-    <state width="1899" height="411" key="GridCell.Tab.3.center" timestamp="1615900890127">
+    <state width="1899" height="422" key="GridCell.Tab.2.bottom/0.0.1920.1200@0.0.1920.1200" timestamp="1626382199304" />
+    <state width="1899" height="422" key="GridCell.Tab.2.center" timestamp="1626382199302">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state width="1899" height="411" key="GridCell.Tab.3.center/0.0.1920.1200@0.0.1920.1200" timestamp="1615900890127" />
-    <state width="1899" height="368" key="GridCell.Tab.3.center/0.25.1920.1090@0.25.1920.1090" timestamp="1610551072627" />
-    <state width="1899" height="411" key="GridCell.Tab.3.left" timestamp="1615900890126">
+    <state width="1899" height="422" key="GridCell.Tab.2.center/0.0.1920.1200@0.0.1920.1200" timestamp="1626382199302" />
+    <state width="1899" height="422" key="GridCell.Tab.2.left" timestamp="1626382199301">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state width="1899" height="411" key="GridCell.Tab.3.left/0.0.1920.1200@0.0.1920.1200" timestamp="1615900890126" />
-    <state width="1899" height="368" key="GridCell.Tab.3.left/0.25.1920.1090@0.25.1920.1090" timestamp="1610551072627" />
-    <state width="1899" height="411" key="GridCell.Tab.3.right" timestamp="1615900890127">
+    <state width="1899" height="422" key="GridCell.Tab.2.left/0.0.1920.1200@0.0.1920.1200" timestamp="1626382199301" />
+    <state width="1899" height="422" key="GridCell.Tab.2.right" timestamp="1626382199303">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state width="1899" height="411" key="GridCell.Tab.3.right/0.0.1920.1200@0.0.1920.1200" timestamp="1615900890127" />
-    <state width="1899" height="368" key="GridCell.Tab.3.right/0.25.1920.1090@0.25.1920.1090" timestamp="1610551072627" />
-    <state x="560" y="338" key="Vcs.Push.Dialog.v2" timestamp="1617208141942">
+    <state width="1899" height="422" key="GridCell.Tab.2.right/0.0.1920.1200@0.0.1920.1200" timestamp="1626382199303" />
+    <state width="1899" height="422" key="GridCell.Tab.3.bottom" timestamp="1626382199301">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state x="560" y="338" key="Vcs.Push.Dialog.v2/0.0.1920.1200@0.0.1920.1200" timestamp="1617208141942" />
-    <state x="100" y="128" width="1720" height="972" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1612444729994">
-      <screen x="0" y="25" width="1920" height="1086" />
-    </state>
-    <state x="100" y="128" width="1720" height="972" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1200@0.0.1920.1200" timestamp="1610571058720" />
-    <state x="100" y="128" width="1720" height="972" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.25.1920.1086@0.25.1920.1086" timestamp="1612444729994" />
-    <state x="100" y="128" width="1720" height="972" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1611151095312">
+    <state width="1899" height="422" key="GridCell.Tab.3.bottom/0.0.1920.1200@0.0.1920.1200" timestamp="1626382199301" />
+    <state width="1899" height="422" key="GridCell.Tab.3.center" timestamp="1626382199299">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state x="100" y="128" width="1720" height="972" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1200@0.0.1920.1200" timestamp="1611151095312" />
-    <state x="662" y="210" width="595" height="674" key="find.popup" timestamp="1618435457449">
+    <state width="1899" height="422" key="GridCell.Tab.3.center/0.0.1920.1200@0.0.1920.1200" timestamp="1626382199299" />
+    <state width="1899" height="422" key="GridCell.Tab.3.left" timestamp="1626382199299">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state x="662" y="210" width="595" height="674" key="find.popup/0.0.1920.1200@0.0.1920.1200" timestamp="1618435457449" />
-    <state x="662" y="155" width="595" height="686" key="find.popup/0.25.1920.1090@0.25.1920.1090" timestamp="1610545975790" />
-    <state x="625" y="292" width="670" height="676" key="search.everywhere.popup" timestamp="1619104716602">
+    <state width="1899" height="422" key="GridCell.Tab.3.left/0.0.1920.1200@0.0.1920.1200" timestamp="1626382199299" />
+    <state width="1899" height="422" key="GridCell.Tab.3.right" timestamp="1626382199300">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state x="625" y="292" width="670" height="676" key="search.everywhere.popup/0.0.1920.1200@0.0.1920.1200" timestamp="1619104716602" />
+    <state width="1899" height="422" key="GridCell.Tab.3.right/0.0.1920.1200@0.0.1920.1200" timestamp="1626382199300" />
+    <state x="560" y="338" key="Vcs.Push.Dialog.v2" timestamp="1619108117335">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="560" y="338" key="Vcs.Push.Dialog.v2/0.0.1920.1200@0.0.1920.1200" timestamp="1619108117335" />
+    <state x="100" y="100" width="1720" height="1000" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1626380980069">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="100" y="100" width="1720" height="1000" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1200@0.0.1920.1200" timestamp="1626380980069" />
+    <state x="662" y="210" width="595" height="674" key="find.popup" timestamp="1626223318622">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="662" y="210" width="595" height="674" key="find.popup/0.0.1920.1200@0.0.1920.1200" timestamp="1626223318622" />
+    <state x="625" y="292" width="670" height="676" key="search.everywhere.popup" timestamp="1626208800892">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="625" y="292" width="670" height="676" key="search.everywhere.popup/0.0.1920.1200@0.0.1920.1200" timestamp="1626208800892" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/email/email.service.spec.ts</url>
+          <line>66</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/email/email.service.spec.ts</url>
+          <line>74</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/email/email.service.spec.ts</url>
+          <line>63</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/email/email.service.ts</url>
+          <line>22</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

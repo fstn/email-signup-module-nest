@@ -13,10 +13,13 @@ export class OptionalJwtAuthGuard extends AuthGuard('jwt') {
     }
   }
 
+  handleRequest(err:any, user:any, info:any, context:any) {
+    return user;
+  }
+
   async canActivate(context: ExecutionContext): Promise<boolean> {
     let result: any = await (super.canActivate(context))
     const request = context.switchToHttp().getRequest();
-    result = result  && this.authService.canActivate(request)
     await this.authService?.setUserOnRequest?.(request)
     return true
   }
